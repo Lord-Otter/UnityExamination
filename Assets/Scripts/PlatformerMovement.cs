@@ -35,6 +35,8 @@ public class PlatformerMovement : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSFX;
     [SerializeField] private AudioClip landSFX;
+    [SerializeField] private Transform playerPosition;
+    [SerializeField] private Transform spawnLocation;
     
     void Awake()
     {
@@ -47,6 +49,14 @@ public class PlatformerMovement : MonoBehaviour
         rb.gravityScale = 0;
 
         //animator = GetComponent<Animator>();
+        
+        playerPosition = GetComponent<Transform>();
+        spawnLocation = GameObject.Find("PlayerSpawn").GetComponent<Transform>();
+    }
+
+    void Start()
+    {
+        transform.position = spawnLocation.position;
     }
     
     void Update()
