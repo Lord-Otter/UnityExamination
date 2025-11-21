@@ -32,6 +32,9 @@ public class PlatformerMovement : MonoBehaviour
     private bool isGrounded;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip landSFX;
     
     void Awake()
     {
@@ -67,6 +70,7 @@ public class PlatformerMovement : MonoBehaviour
             else
             {
                 // Has jumped. Play jump sound and/or trigger jump animation etc
+                PlaySFX(jumpSFX);
             }
         }
         // Check if character gained contact with ground this frame
@@ -74,6 +78,7 @@ public class PlatformerMovement : MonoBehaviour
         {
             jumpReleased = false;
             // Has landed, play landing sound and trigger landing animation
+            PlaySFX(landSFX);
         }
         wasGrounded = isGrounded;
         
@@ -183,4 +188,14 @@ public class PlatformerMovement : MonoBehaviour
             jumpInput = false;
         }
     }
+    
+    private void PlaySFX(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
 }
+
+
